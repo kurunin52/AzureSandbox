@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security;
 using System.Xml;
 
 namespace SampleWebApplication.Controllers
@@ -20,7 +21,7 @@ namespace SampleWebApplication.Controllers
                 writer.WriteStartDocument();
 
                 // BAD: Insert user input directly into XML
-                writer.WriteRaw("<employee><name>" + input + "</name></employee>");
+                writer.WriteRaw("<employee><name>" + SecurityElement.Escape(input) + "</name></employee>");
 
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
